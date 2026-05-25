@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIOUK — Luxury E-Commerce</title>
+    <meta name="description" content="RIOUK — The ultimate luxury e-commerce experience. Discover elite tech, fashion, and lifestyle products with an immersive 3D shopping interface.">
+    <meta property="og:title" content="RIOUK — Luxury E-Commerce">
+    <meta property="og:description" content="Discover elite collections with immersive 3D shopping.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Ambient Glow Background Blobs -->
+    <div class="ambient-glow" aria-hidden="true">
+        <div class="glow-blob glow-1"></div>
+        <div class="glow-blob glow-2"></div>
+        <div class="glow-blob glow-3"></div>
+    </div>
+
+    <!-- ═══ Premium Navbar ═══ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-brand" id="nav-brand">
+                <img src="logo.jpg" alt="RIOUK Logo" class="brand-logo-img">
+                <span class="brand-text">RIOUK</span>
+            </a>
+
+            <div class="nav-search" id="nav-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="global-search" placeholder="Search luxury collections..." autocomplete="off">
+                <div class="search-dropdown" id="search-dropdown"></div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-view="home" id="nav-home">
+                    <i class="fas fa-gem"></i><span>Home</span>
+                </a>
+                <a href="#" class="nav-link" data-view="shop" id="nav-shop">
+                    <i class="fas fa-store"></i><span>Shop</span>
+                </a>
+                <a href="#" class="nav-link" data-view="travel" id="nav-travel">
+                    <i class="fas fa-plane"></i><span>Travel</span>
+                </a>
+                <a href="#" class="nav-link" data-view="account" id="nav-account">
+                    <i class="fas fa-user-circle"></i><span>Profile</span>
+                </a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="nav-icon-btn" id="cart-trigger" aria-label="Open cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══ Main Content Area ═══ -->
+    <main id="app-view" class="main-content">
+        <!-- Views rendered by JS -->
+    </main>
+
+    <!-- ═══ Cart Sidebar Drawer ═══ -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Bag</h3>
+            <button class="cart-close-btn" id="close-cart" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-drawer-items" id="cart-items">
+            <!-- Cart items injected here -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span class="cart-total-price">₹<span id="cart-total">0</span></span>
+            </div>
+            <button onclick="processCheckout()" class="btn-checkout" id="checkout-btn">
+                <span>PROCEED TO CHECKOUT</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ═══ Toast Notification ═══ -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-msg">Item added to Riouk Bag</span>
+    </div>
+
+    <!-- ═══ Product Detail Modal ═══ -->
+    <div id="product-detail-view"></div>
+
+    <!-- ═══ QR Scanner Modal ═══ -->
+    <div id="scanner-modal" class="scanner-modal">
+        <div class="scanner-overlay" onclick="closeScanner()"></div>
+        <div class="scanner-content">
+            <div class="scanner-header">
+                <h3 id="scanner-title">Scan QR Code</h3>
+                <i class="fas fa-times" onclick="closeScanner()" style="font-size:24px; cursor:pointer;"></i>
+            </div>
+            <div class="scanner-viewport">
+                <video id="scanner-video" autoplay playsinline></video>
+                <div class="scanner-frame">
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+            <p id="scanner-status" style="text-align:center; color:#8a8a9a; margin-top:16px; font-size:14px;">Point your camera at a QR code or product</p>
+            <button onclick="closeScanner()" class="btn-primary" style="margin-top:16px;">CLOSE SCANNER</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
